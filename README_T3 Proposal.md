@@ -1,6 +1,6 @@
 # Project3_Team2
 # 1. Introduction
-We propose the development of a web application that provides users with a convenient way to locate and compare petrol, diesel, and electric charging stations. This application will empower users to make informed decisions about their refueling needs, including finding the nearest stations, checking pricing, and viewing payment methods accepted.
+We propose the development of a web application that provides users with a convenient way to locate and compare petrol, diesel, and electric charging stations. This application will empower users to make informed decisions about their refueling needs, including finding the nearest stations. 
 
 
 # 2. Project Objectives
@@ -56,4 +56,4 @@ The project will be undertaken by:
 
 
 
-
+(checking pricing,viewing payment methods accepted and other functions may become available if time allows it)
