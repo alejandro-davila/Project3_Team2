@@ -1,44 +1,79 @@
-body {
-  padding: 0;
-  margin: 0;
-}
+body {padding: 0;
+       margin: 0}
 
 #map,
 body,
-html {
-  height: 100%;
-}
+html {height: 100%}
 
 /* CSS from the leaflet-choropleth documentation */
 .legend {
   color: #555;
-  padding: 6px 8px;
+  padding: 2px 8px;
   font: 12px Arial, Helvetica, sans-serif;
   font-weight: bold;
   background: white;
-  background: rgba(255,255,255,0.8);
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-}
-.legend ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  clear: both;
-}
-.legend li {
-  display: inline-block;
-  width: 40px;
-  height: 22px;
-}
-.legend .min {
-  float: left;
-  padding-bottom: 5px;
-}
-.legend .max {
-  float: right;
+
+  top: 10%;
+  left: 1%; 
+  width: 50%; 
+  height: 20%;
+  z-index: 1000; 
+ 
 }
 
-h1 {
-  text-align: center;
-}
+.legend ul {list-style-type: none;
+                    padding: 0;
+                     margin: 0;
+                      clear: both}
+
+
+.legend li {display: inline-block;
+              width: 40px;
+              eight: 22px}
+
+
+.legend .min {float: left;
+      padding-bottom: 5px}
+
+
+.legend .max {float: right}
+
+
+h1 {text-align: center;
+         color: #333;
+        margin: 0;
+      text-align: center}
+
+h2 {font-size: 1.5rem;
+        color: #333;
+       margin: 0;
+      text-align: center}
+
+h3 {font-size: 2.0rem;
+        color: #333;
+       margin: 0;
+   text-align: center}
+
+p {font-size: 1rem;
+       color: #666}
+
+
+/* ----------------- BOXES ---------------vvvvvvvv--> */
+.box {background-color: #f0f0f0;
+  display: inline-block;
+                border: 1px solid #ccc;
+               padding: 20px;
+                margin: 10px;
+            text-align: center}
+
+.box2 a {background-color: #f0f0f0;
+            display: inline-block;
+              border: 1px solid #ccc;
+             padding: 20px;
+              height: 20px;
+              margin: 10px 0;
+          text-align: center}            
+/* ----------------- BOXES ---------------^^^^^^^^--> */

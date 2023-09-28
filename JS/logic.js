@@ -49,7 +49,7 @@ function CreateMap(map){
 
     // Add the minimum and maximum.
     var legendInfo = `
-        <h2>Fuel Markers</h2>
+        <h3>Fuel Markers</h3>
 
         <div class="labels">
         <div class="min">
