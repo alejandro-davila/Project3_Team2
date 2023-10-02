@@ -7,11 +7,15 @@
     var map = document.getElementById('map');
     var windowHeight = window.innerHeight || document.documentElement.clientHeight;
     var windowWidth = window.innerWidth || document.documentElement.clientWidth;
-    var mapHeight = windowHeight - 400; // Adjust as needed
-    var mapWidth = windowWidth - 400;   // Adjust as needed
+    var mapHeight = windowHeight - 600; // Adjust the vertical position by changing the subtraction value
+    var mapWidth = windowWidth - 825;   // Adjust the horizontal position by changing the subtraction value
 
     map.style.height = mapHeight + 'px';
-    map.style.width = mapWidth + 'px'}
+    map.style.width = mapWidth + 'px';
+    map.style.position = 'absolute'; // Set the position to absolute
+    map.style.top = '475px'; // Adjust the top position to move it down
+    map.style.right = '35px'; // Adjust the left position to move it right
+  }
 
   // Initial map size on page load
   window.addEventListener('load', updateMapSize);
@@ -20,19 +24,55 @@
   window.addEventListener('resize', updateMapSize);
 </script>
 
-<style>
-  #map {
-    height: 20px;
-    margin-top: 50px;
-    margin-left: 350px;
-    display: block}
-</style>
 <!----------------- Function to update map size ---------------^^^^^^^^-->
 
 
-<!----------------- Function to update map size ---------------^^^^^^^^-->
+<!----------------- HEAD ---------------vvvvvvvv-->
 
 <head>
+  <style>
+    #header {
+        position: relative; 
+        height: 290px;
+        background-repeat: no-repeat;
+        margin-left: 850px;
+        margin-right: 850px;
+        background-image: url('https://media.tenor.com/esDSosJukD4AAAAM/steag-steagenergy.gif'),
+                          url('https://media.tenor.com/esDSosJukD4AAAAM/steag-steagenergy.gif');
+        background-size: 25%, 25%; 
+        background-position: left center, right center; 
+    }
+
+    #title {
+      margin-right: 20px; 
+      font-size: 75px;
+      margin-bottom: 20px;
+      align-items:center;
+      color: black;
+      position: absolute; /* Enable absolute positioning */
+      top: 50%; /* Move the element down by 50% of its parent's height */
+      left: 50%; /* Center horizontally */
+      transform: translate(-50%, -50%)}
+
+    /* Style the pseudo-elements */
+    #header::before,
+    #header::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 15%; /* Set the size for both pseudo-elements */
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: 15%; /* Set the size for both pseudo-elements */
+    }
+
+
+
+</style>
+
+
+
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -54,30 +94,53 @@
 
    <!-- Icons -->
   <link rel="shortcut icon" href="icons/favicon.ico">
-
-
 </head>
 
 
 <!----------------- BODY ---------------vvvvvvvv-->
 <body>
-  <!---------- Titles ----------->
-<div>
-    <h2>Team 2 - Project 3</h2>
-</div>
 
-<div class="box2">
+
+
+
+
+
+  <div id="header">
+    <h1 id="title">Team 2 - Project 3</h1>
+  </div>
+
+
+
+  <!---------- Titles ----------->
+
+  <div class="box2">
     <h2><a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/about-us.html">About Us</a>
       <a href="-">Graphs</a>
       <a href="https://github.com/alejandro-davila/Project3_Team2">GitHub Repository</a>
       <a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/references.html">Tools/ References</a></h2>
     <!-- <p>Content for Title 2 goes here.</p> -->
-</div>
+  </div>
 
 
 
-  <!-- Div for map -->
-  <div id="map"></div>
+
+   <!---------- SELECTION BOX ----------->
+   <div class="container">
+    <div id="map" style="height: 350px;"></div>
+    
+    <div class="box1">
+      Tools and Selections
+      <div id="overlayControlContainer">
+        <div class="overlayColumn">
+          <!-- Add your overlay control boxes for the first column here -->
+        </div>
+        <div class="overlayColumn">
+          <!-- Add your overlay control boxes for the second column here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
 
@@ -87,7 +150,6 @@
   <script type="text/javascript" src="JS/logic.js"></script>
 </body>
 <!----------------- BODY ---------------^^^^^^^^-->
-
 
 
 

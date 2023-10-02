@@ -1,50 +1,10 @@
 body {padding: 0;
-       margin: 0}
-
-#map,
-body,
-html {height: 100%}
-
-/* CSS from the leaflet-choropleth documentation */
-.legend {
-  color: #555;
-  padding: 2px 8px;
-  font: 12px Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  background: white;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-
-  top: 10%;
-  left: 1%; 
-  width: 50%; 
-  height: 20%;
-  z-index: 1000; 
- 
-}
-
-.legend ul {list-style-type: none;
-                    padding: 0;
-                     margin: 0;
-                      clear: both}
-
-
-.legend li {display: inline-block;
-              width: 40px;
-              eight: 22px}
-
-
-.legend .min {float: left;
-      padding-bottom: 5px}
-
-
-.legend .max {float: right}
-
+       margin: 0;
+      display:block;}
 
 h1 {text-align: center;
   font-size: 3.5rem;
-         color: #333;
+         color: #c40707;
         margin: 0;
       text-align: center}
 
@@ -54,7 +14,7 @@ h2 {font-size: 1.5rem;
       text-align: center}
 
 h3 {font-size: 1.0rem;
-        color: #333;
+        color: #000bda;
        margin: 0;
    text-align: center}
 
@@ -77,7 +37,8 @@ h4 {font-size: 1.5rem;
             display: inline-block;
               border: 1px solid #ccc;
              padding: 20px;
-              height: 20px;
+             font-size: 50px;
+              height: 50px;
               margin: 10px 0;
           text-align: center}      
           
@@ -101,3 +62,48 @@ h4 {font-size: 1.5rem;
 
 
 /* ----------------- BOXES ---------------^^^^^^^^--> */
+
+
+/* Define the styles for the box class */
+
+
+
+.box1 {
+  width: 700px;
+  height: 1200px;
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  left: 25px;
+  line-height: 100px;
+  top: 85px;
+  font-size: 40px;
+  border: 2px solid #2980b9;
+  border-radius: 10px;
+  position: relative; /* Add relative positioning to contain the overlayControlContainer */
+}
+
+#overlayControlContainer {
+
+  position: absolute;
+  top: 150px;
+  left: 175px;
+  z-index: 1000;
+}
+
+
+
+
+/* Style the warning message */
+.warning-message {
+  display: none;
+  background-color: #fff;
+  border: 2px solid #f00;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Style the warning message icon */
+.warning-message img {
+  margin-bottom: 10px;
+}
