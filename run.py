@@ -1,15 +1,16 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from sqlalchemy import create_engine, Column, Integer, String, Float, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import requests
 
+# API key you received from NREL
+api_key = "RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q"
+
 # Creating Flask app
 app = Flask(__name__)
 
 DATABASE_URI = 'sqlite:///fuel_stations.db'
-API_KEY = 'RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q'  # Replace with your actual API Key
-BASE_URL = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json"
 
 # Define the database engine
 engine = create_engine(DATABASE_URI, echo=True)
@@ -41,14 +42,59 @@ class FuelStation(Base):
     zip = Column(String)
     latitude = Column(Float)
     longitude = Column(Float)
-    
-# After defining the model, create all the tables in the database
-Base.metadata.create_all(engine)
+
+# Function to populate the database from the NREL API
+def populate_database():
+    BASE_URL = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json"
+
+    # Define the parameters for the API request
+    params = {
+        'api_key': api_key,
+        'fuel_type': 'ELEC',
+        'state': 'TX'
+    }
+
+    # Make the API request
+    response = requests.get(BASE_URL, params=params)
+
+    if response.status_code == 200:
+        data = response.json()['fuel_stations']
+
+        # Create a session
+        session = Session()
+
+        # Insert data into the database
+        for station_data in data:
+            station = FuelStation(
+                station_name=station_data['station_name'],
+                address=station_data['street_address'],
+                fuel_type_code=station_data['fuel_type_code'],
+                ev_network=station_data['ev_network'],
+                ev_level1_evse_num=station_data['ev_level1_evse_num'],
+                ev_level2_evse_num=station_data['ev_level2_evse_num'],
+                ev_dc_fast_num=station_data['ev_dc_fast_num'],
+                ev_connector_types=station_data['ev_connector_types'],
+                ev_pricing=station_data['ev_pricing'],
+                ev_renewable_source=station_data['ev_renewable_source'],
+                restricted_access=bool(station_data['access_code'] == 'public'),
+                state=station_data['state'],
+                city=station_data['city'],
+                zip=station_data['zip'],
+                latitude=station_data['latitude'],
+                longitude=station_data['longitude']
+            )
+            session.add(station)
+
+        # Commit the changes and close the session
+        session.commit()
+        session.close()
+    else:
+        print("Failed to fetch data from the NREL API.")
 
 # Index
 @app.route('/')
 def index():
-    return "Welcome to the Fuel Station API! Add /api/fuel_stations to the url"
+    return "Welcome to the Fuel Station API! Go to http://127.0.0.1:5001/api/fuel_stations"
 
 # Defining route to get fuel stations
 @app.route('/api/fuel_stations', methods=['GET'])
@@ -91,4 +137,6 @@ def get_fuel_stations():
 
 # Running the app in debug mode
 if __name__ == '__main__':
+    # Populate the database before running the app
+    populate_database()
     app.run(debug=True, port=5001)
