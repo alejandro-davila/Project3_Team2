@@ -1,148 +1,142 @@
-// Store our API endpoint.
-var queryUrl =
-  "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q&limit=10&fuel_type=ELEC&state=TX";
-
-//----------------------- POP UP WINDOW -----------------------vvvvvvvv
-  // Perform a GET request.
-d3.json(queryUrl).then(function (data) {
-  // Give each fuel_stations a popup.
-  function bindPopuptoStation(fuel_stations, layer) {
-    layer.bindPopup(
-      `<h3>Location: ${fuel_stations.properties}<br>
-      Property: ${fuel_stations.properties}<br>
-      Click <a href="${fuel_stations.properties}" target="_blank">ME!</a> for more info.
-      </h3><hr><p>${new Date(fuel_stations.updated_at)}</p>`)}
-//----------------------- POP UP WINDOW -----------------------^^^^^^^
+// Create a map object
 
 
+//---------------------------------------------------------- MAPS (STREET, TOPO, DARK) ----------------------------------------------------------
+function CreateMap(map,CHADEMOMarkers,J1772Markers,J1772CMarkers,chargertype){
+  let street = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
 
-
-
-//----------------------- MARKERS -----------------------vvvvvvvv
-    function generateFuelType(fuel_station) {
-      return {
-        color: generateFuelColor(fuel_station.fuel_type_code),
-        radius: generateFuelRadius(fuel_station.latitude, fuel_station.longitude)}}
-
-    function generateQuakeRadius(latitude, longitude) {
-      return 10}
-
-    function generateFuelMarker(fuel_station, layer) {
-      const style = generateFuelType(fuel_station);
-      return L.circleMarker(layer, style)}
-//----------------------- MARKERS -----------------------^^^^^^^
-
-
-
-
-
-//----------------------- MAPS -----------------------vvvvvvvv
-  var fuel_stations = L.geoJSON(data.features, {
-    onEachFeature: bindPopuptoStation,
-    style: generateFuelType,
-    pointToLayer: generateFuelMarker});
-  console.log(fuel_stations);
-
-//---------------------- Create the base layers---------------//
-  var street = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    {attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
-                        
-    ///---------------https://wordpress.org/support/topic/how-do-you-get-topo-map/
-  var topo = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", 
+  let topo = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", 
     {attribution:
       'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'});
     
-      //---------------https://docs.mapbox.com/api/maps/styles/ ----- 
-  var PUBLIC_API_KEY =
-    "pk.eyJ1Ijoic2NvbHNvbjgyIiwiYSI6ImNrdTYzbjhrdjU3ODMyb28yZmlrMHpybjYifQ.jzpQ-HWh3lT55X-v0IQoHA";
-
-     //---------------https://docs.mapbox.com/help/troubleshooting/migrate-legacy-static-tiles-api/
-  let dark = L.tileLayer(
-    "https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token={accessToken}",
+ 
+  
+  let PUBLIC_API_KEY ="pk.eyJ1Ijoic2NvbHNvbjgyIiwiYSI6ImNrdTYzbjhrdjU3ODMyb28yZmlrMHpybjYifQ.jzpQ-HWh3lT55X-v0IQoHA";
+  let dark = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token={accessToken}",
     {attribution:
-        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
+      'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
       maxZoom: 18,
       accessToken: PUBLIC_API_KEY});
 
-  let satellite = L.tileLayer(
-    "https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}",
-    {attribution:
-        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 18,
-      accessToken: PUBLIC_API_KEY});
-//---------------------- Create the base layers---------------//
-//----------------------- MAPS -----------------------^^^^^^^
-
-
-
-//----------------------- MAP SELECTOR -----------------------vvvvvvvv
-  // Create a baseMaps object.
-  var baseMaps = {
+  let baseMaps = {
     "Street Map": street,
     "Topographic Map": topo,
-    Dark: dark,
-    Satellite: satellite};
-//----------------------- MAP SELECTOR -----------------------^^^^^^^
+    Dark: dark};
+
+  let myMap = L.map("map", {
+    center: [30.417, -100.810],
+    layers:[street,map],
+    zoom: 7});
 
 
-  // Create map, streetmap and fuel layers.
-  var myMap = L.map("map", {
-    center: [31.00, -100.00],
-    zoom: 7,
-    layers: [street, fuel_stations]});
+  console.log(map)
 
-  var Diesel_map = new L.LayerGroup();
+//---------------------------------------------------------- Markers ----------------------------------------------------------
+    
+    let marker1 = {
+      "CHAdeMO": CHADEMOMarkers,
+      "J-1772": J1772Markers,
+      "J-1772 Combo": J1772CMarkers
+    };
+    
+    
+  L.control.layers(baseMaps, null, {
+    collapsed: false
+  }).addTo(myMap);  
 
-  d3.json("https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q&limit=10&fuel_type=ELEC&state=TX")
-  .then(function (tectonicPlateData) {
-    L.geoJson(tectonicPlateData).addTo(Diesel_map);
-    Diesel_map.addTo(myMap);
-    console.log(Diesel_map)});
+  
+  // Create a control for overlay maps
+  let overlayControl = L.control.layers(null, marker1, {
+    collapsed: false});
+  overlayControl.setPosition('topright');
+  myMap.addControl(overlayControl);
 
-  // Create an overlay object to hold our overlay.
-  var overlayMaps = {
-    // Add Tectonic Plates
-    "Diesel Stations": Diesel_map,
-    "Electric Stations": fuel_stations};
+  let overlayControlContainer = document.createElement('div');
 
-  // Creating a layer control.
-  L.control
-    .layers(baseMaps, overlayMaps, {
-      collapsed: false})
-    .addTo(myMap);
+  overlayControlContainer.appendChild(overlayControl.getContainer());
+  document.getElementById('overlayControlContainer').appendChild(overlayControlContainer);
 
-  //----------------------- Color Legend -----------------------vvvvvvvv
 
-  var legend = L.control({ position: "bottomright" });
-  legend.onAdd = function () {
-    var div = L.DomUtil.create("div", "info legend");
-    var limits = [0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0];
-    var colors = ["#FFFF99","#FFFF00","#FFB266","#FF9933",
-      "#FF8000","#CC6600","#CC0000","#990000","#660000","#330000"];
+}
 
-    // Add the minimum and maximum.
-    var legendInfo = `
-      <h2>Fuel Markers</h2>
 
-      <div class="labels">
-      <div class="min">
-      ${limits[0]}
-      </div>
+//---------------------------------------------------------- JSON reader ----------------------------------------------------------
+let fuelurl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q&limit=200&fuel_type=ELEC&state=TX"
+
+function markers(){
+  d3.json(fuelurl).then(function(data){
+      console.log(data);
+      let J1772Markers=[]
+      let CHADEMOMarkers=[]
+      let J1772CMarkers=[]
+      let chargertype=[]
+      let stations = data.fuel_stations;
+      var IconOptions = L.Icon.extend({
+          options: {
+              iconUrl:'',
+              iconSize:     [38, 95],
+              iconAnchor:   [19, 64],
+              popupAnchor:  [-3, -76]
+          }
+      });
+
+      var J1772icon=new IconOptions({iconUrl:'icons/ad.png'})
+      var CHADEMOicon=new IconOptions({iconUrl:'icons/sd.png'})
+      var J1772Comboicon=new IconOptions({iconUrl:'icons/bg.png'})
+
+
+
+      for (let i = 0; i < stations.length; i++) {
+        let properties=stations[i].station_name; 
+        let fueltype = stations[i].fuel_type_code
+        let long=stations[i].longitude;
+        let lat=stations[i].latitude;
+        for (let x in stations[i].ev_connector_types){
+          chargertype.push(stations[i].ev_connector_types[x])
+          
+        if (stations[i].ev_connector_types.includes("J1772")){
+          let J1772Marker = L.marker([lat, long],{icon: J1772icon})
+          .bindPopup("<h3>" + properties+ "<h3><h3>Fuel Type: " + fueltype + "</h3>");
+          J1772Markers.push(J1772Marker);
+        }
+        if (stations[i].ev_connector_types.includes("CHADEMO")){
+          let CHADEMOMarker = L.marker([lat, long],{icon: CHADEMOicon})
+          .bindPopup("<h3>" + properties+ "<h3><h3>Fuel Type: " + fueltype + "</h3>");
+          CHADEMOMarkers.push(CHADEMOMarker);
+        }
+        if (stations[i].ev_connector_types.includes("J1772COMBO")){
+          let J1772CMarker = L.marker([lat, long],{icon: J1772Comboicon})
+          .bindPopup("<h3>" + properties+ "<h3><h3>Fuel Type: " + fueltype + "</h3>");
+          J1772CMarkers.push(J1772CMarker);
+        }
+          }
+  
+
+
+
+      }
+
+      var allMarkers = J1772Markers.concat(CHADEMOMarkers);
+
+      CHADEMOMarkers=L.layerGroup(CHADEMOMarkers)
+      J1772Markers =L.layerGroup(J1772Markers)
+      J1772CMarkers=L.layerGroup(J1772CMarkers)
       
-      <div class="max">
-      ${limits[limits.length - 1]}
-      </div>
-      </div>
-      <ul>`;
+      var electriclayer = L.layerGroup(allMarkers);
 
-    limits.forEach(function (limit, index) {
-      legendInfo += '<li style="background-color: ' + colors[index] + '"></li>'});
+      CreateMap(electriclayer,CHADEMOMarkers,J1772Markers,J1772CMarkers,chargertype);
 
-    legendInfo += "</ul>";
-    div.innerHTML = legendInfo;
-    return div};
-  // Adding the legend to the map
-  legend.addTo(myMap);
-});
-    //----------------------- Color Legend -----------------------^^^^^^^
+
+  })
+
+}
+
+
+//---------------------------------------------------------- PRODUCES MAP ON SITE (DO NOT DELETE!!)----------------------------------------------------------
+d3.json('https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q&limit=200&fuel_type=ELEC&state=TX').then(markers)
+//---------------------------------------------------------- PRODUCES MAP ON SITE (DO NOT DELETE!!)----------------------------------------------------------
+
+
+
+
