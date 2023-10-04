@@ -2,8 +2,7 @@
 
 
 //---------------------------------------------------------- MAPS (STREET, TOPO, DARK) ----------------------------------------------------------
-function CreateMap(map){
-
+function CreateMap(map,CHADEMOMarkers,J1772Markers,J1772CMarkers,chargertype){
   let street = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
   {attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
 
@@ -24,33 +23,23 @@ function CreateMap(map){
     "Street Map": street,
     "Topographic Map": topo,
     Dark: dark};
- 
+
   let myMap = L.map("map", {
     center: [30.417, -100.810],
     layers:[street,map],
     zoom: 7});
 
 
-
-
-
+  console.log(map)
 
 //---------------------------------------------------------- Markers ----------------------------------------------------------
     
     let marker1 = {
-      "Tesla (Fast)": map,
-      "CCS/SAE": map,
-      "CHAdeMO": map,
-      "J-1772": map,
-      "Tesla": map,
-      "Tesla (Roadster)": map,
-      "NEMA 14-50": map,
-      "Wall": map,
-      "NEMA TT-30": map,
+      "CHAdeMO": CHADEMOMarkers,
+      "J-1772": J1772Markers,
+      "J-1772 Combo": J1772CMarkers
     };
     
-
-
     
   L.control.layers(baseMaps, null, {
     collapsed: false
@@ -69,90 +58,81 @@ function CreateMap(map){
   document.getElementById('overlayControlContainer').appendChild(overlayControlContainer);
 
 
-
-// Function to show a warning message when any marker is clicked
-function showWarningMessage(e) {
-  let marker = e.target;
-  
-  // Create a popup with the warning message content
-  let popupContent = `
-    <div class="warning-popup">
-      <img src="warning-icon.png" alt="Warning Icon" width="50" height="50">
-      <p>Are you sure?</p>
-    </div>
-  `;
-  
-  // Bind the popup to the marker
-  marker.bindPopup(popupContent).openPopup();
 }
-
-// Iterate through the marker1 object and add a click event listener to each marker
-for (let markerName in marker1) {
-  if (marker1.hasOwnProperty(markerName)) {
-    let marker = marker1[markerName];
-    marker.addEventListener('click', showWarningMessage);
-  }
-}}
-
-
-
-
-
 
 
 //---------------------------------------------------------- JSON reader ----------------------------------------------------------
-let fuelurl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q&limit=10&fuel_type=ELEC&state=TX"
+let fuelurl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q&limit=200&fuel_type=ELEC&state=TX"
 
-function markers() {
-  d3.json(fuelurl).then(function (data) {
-    console.log(data);
-    let gasmarkers = [];
-    let stations = data.fuel_stations;
-    
-    // Define icon URLs for different fuel types
-    var iconMapping = {
-      ELEC: 'icons/electric-icon.png',
-      CNG: 'icons/cng-icon.png',
-      LNG: 'icons/lng-icon.png',
-      HY: 'icons/hydrogen-icon.png',
-      BD: 'icons/biodiesel-icon.png',
-      E85: 'icons/e85-icon.png',
-      LPG: 'icons/lpg-icon.png',
-    };
+function markers(){
+  d3.json(fuelurl).then(function(data){
+      console.log(data);
+      let J1772Markers=[]
+      let CHADEMOMarkers=[]
+      let J1772CMarkers=[]
+      let chargertype=[]
+      let stations = data.fuel_stations;
+      var IconOptions = L.Icon.extend({
+          options: {
+              iconUrl:'',
+              iconSize:     [38, 95],
+              iconAnchor:   [19, 64],
+              popupAnchor:  [-3, -76]
+          }
+      });
 
-    for (let i = 0; i < stations.length; i++) {
-      let properties = stations[i].station_name;
-      let fueltype = stations[i].fuel_type_code;
-      let long = stations[i].longitude;
-      let lat = stations[i].latitude;
+      var J1772icon=new IconOptions({iconUrl:'icons/ad.png'})
+      var CHADEMOicon=new IconOptions({iconUrl:'icons/sd.png'})
+      var J1772Comboicon=new IconOptions({iconUrl:'icons/bg.png'})
 
-      // Select the appropriate icon URL based on the fuel type
-      var iconUrl = iconMapping[fueltype] || 'icons/default-icon.png';
 
-      let gasmarker = L.marker([lat, long], { 
-        icon: L.icon({
-          iconUrl: iconUrl,
-          iconSize: [38, 95],
-          shadowSize: [50, 64],
-          iconAnchor: [19, 64],
-          shadowAnchor: [4, 62],
-          popupAnchor: [-3, -76],
-        })
-      }).bindPopup("<h3>" + properties + "</h3><h3>Fuel Type: " + fueltype + '</h3>');
 
-      gasmarkers.push(gasmarker);
-    }
+      for (let i = 0; i < stations.length; i++) {
+        let properties=stations[i].station_name; 
+        let fueltype = stations[i].fuel_type_code
+        let long=stations[i].longitude;
+        let lat=stations[i].latitude;
+        for (let x in stations[i].ev_connector_types){
+          chargertype.push(stations[i].ev_connector_types[x])
+          
+        if (stations[i].ev_connector_types.includes("J1772")){
+          let J1772Marker = L.marker([lat, long],{icon: J1772icon})
+          .bindPopup("<h3>" + properties+ "<h3><h3>Fuel Type: " + fueltype + "</h3>");
+          J1772Markers.push(J1772Marker);
+        }
+        if (stations[i].ev_connector_types.includes("CHADEMO")){
+          let CHADEMOMarker = L.marker([lat, long],{icon: CHADEMOicon})
+          .bindPopup("<h3>" + properties+ "<h3><h3>Fuel Type: " + fueltype + "</h3>");
+          CHADEMOMarkers.push(CHADEMOMarker);
+        }
+        if (stations[i].ev_connector_types.includes("J1772COMBO")){
+          let J1772CMarker = L.marker([lat, long],{icon: J1772Comboicon})
+          .bindPopup("<h3>" + properties+ "<h3><h3>Fuel Type: " + fueltype + "</h3>");
+          J1772CMarkers.push(J1772CMarker);
+        }
+          }
+  
 
-    CreateMap(L.layerGroup(gasmarkers));
-  });
+
+
+      }
+
+      var allMarkers = J1772Markers.concat(CHADEMOMarkers);
+
+      CHADEMOMarkers=L.layerGroup(CHADEMOMarkers)
+      J1772Markers =L.layerGroup(J1772Markers)
+      J1772CMarkers=L.layerGroup(J1772CMarkers)
+      
+      var electriclayer = L.layerGroup(allMarkers);
+
+      CreateMap(electriclayer,CHADEMOMarkers,J1772Markers,J1772CMarkers,chargertype);
+
+
+  })
+
 }
 
 
-
 //---------------------------------------------------------- PRODUCES MAP ON SITE (DO NOT DELETE!!)----------------------------------------------------------
-d3.json('https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q&limit=10&fuel_type=ELEC&state=TX').then(markers)
-//---------------------------------------------------------- PRODUCES MAP ON SITE (DO NOT DELETE!!)----------------------------------------------------------
-
-
-
-
+d3.json('https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q&limit=200&fuel_type=ELEC&state=TX').then(markers)
+//---------------------------------------------------------- PRODUCES MAP ON SITE (DO NOT DELETE!!

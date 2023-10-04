@@ -4,7 +4,7 @@ body {padding: 0;
 
 h1 {text-align: center;
   font-size: 3.5rem;
-         color: #c40707;
+         color: black;
         margin: 0;
       text-align: center}
 
@@ -47,13 +47,34 @@ h4 {font-size: 1.5rem;
             justify-content: space-between;
             margin-left: 50px;
             margin-right: 50px;
-            margin-top: 100px}
+            margin-top: 100px;
+          }
+
+          .personal-info2 {
+            display: flex;
+            justify-content: space-between;
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-top: 100px;
+          }
+
+
+.personal-info * {
+            font-size:80px; /* Adjust the font size as needed */
+            margin: 0 5px; /* Adjust the spacing between elements horizontally */
+            padding: 5px 10px; /* Adjust the padding around elements */
+          }          
+
         
 .person {
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 200px;
+            height: 200px ;
             text-align: center}
+
+            
         
 .person img {
             width: 100px; /* Adjust the width of the image as needed */
@@ -92,18 +113,52 @@ h4 {font-size: 1.5rem;
 }
 
 
-
-
-/* Style the warning message */
-.warning-message {
-  display: none;
-  background-color: #fff;
-  border: 2px solid #f00;
-  padding: 10px;
-  text-align: center;
+.person {
+  text-align: center; /* Center-align the content */
+  margin-bottom: 20px;
+  position: relative /* Add some spacing between the image and the GIF */
 }
 
-/* Style the warning message icon */
-.warning-message img {
-  margin-bottom: 10px;
+
+
+.gif-container {
+  text-align: center; /* Center-align the content */
+  position: relative; /* Set the container as a positioning context */
+}
+
+
+
+.overlay-image {
+  position: absolute; /* Position the image absolutely within the container */
+  top: 50%; /* Position the image at the vertical center of the container */
+  left: 50%; /* Position the image at the horizontal center of the container */
+  transform: translate(-50%, -50%); /* Center the image using transform */
+  z-index: 1; /* Ensure the image is on top of the iframe */
+  width: 250px;
+  height: 250px; /* Ensure the image doesn't exceed the container's width */
+}
+
+
+.overlay-image2 {
+  position: absolute; /* Position the image absolutely within the container */
+  top: 50%; /* Position the image at the vertical center of the container */
+  left: 50%; /* Position the image at the horizontal center of the container */
+  transform: translate(-50%, -50%); /* Center the image using transform */
+  z-index: 1; /* Ensure the image is on top of the iframe */
+  width: 80%; /* Ensure the image doesn't exceed the container's width */
+}
+
+
+
+
+
+
+/* styles.css */
+#overlayControlContainer1 {
+  /* Your CSS styles for overlayControl1 here */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
