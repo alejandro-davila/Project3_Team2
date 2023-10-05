@@ -7,14 +7,14 @@
     var map = document.getElementById('map');
     var windowHeight = window.innerHeight || document.documentElement.clientHeight;
     var windowWidth = window.innerWidth || document.documentElement.clientWidth;
-    var mapHeight = windowHeight - 600; // Adjust the vertical position by changing the subtraction value
-    var mapWidth = windowWidth - 825;   // Adjust the horizontal position by changing the subtraction value
+    var mapHeight = windowHeight - 400; // Adjust the vertical position by changing the subtraction value
+    var mapWidth = windowWidth - 500;   // Adjust the horizontal position by changing the subtraction value
 
     map.style.height = mapHeight + 'px';
     map.style.width = mapWidth + 'px';
-    map.style.position = 'absolute'; // Set the position to absolute
-    map.style.top = '475px'; // Adjust the top position to move it down
-    map.style.right = '35px'; // Adjust the left position to move it right
+    map.style.position = 'relative'; // Set the position to absolute
+    map.style.top = '50px'; // Adjust the top position to move it down
+    map.style.left = '450px'; // Adjust the left position to move it right
   }
 
   // Initial map size on page load
@@ -33,19 +33,19 @@
   <style>
     #header {
         position: relative; 
-        height: 290px;
+        height: 200px;
         background-repeat: no-repeat;
-        margin-left: 850px;
-        margin-right: 850px;
+        margin-left: 550px;
+        margin-right: 550px;
         background-image: url('https://media.tenor.com/esDSosJukD4AAAAM/steag-steagenergy.gif'),
                           url('https://media.tenor.com/esDSosJukD4AAAAM/steag-steagenergy.gif');
-        background-size: 25%, 25%; 
+        background-size: 150px, 150px; 
         background-position: left center, right center; 
     }
 
     #title {
       margin-right: 20px; 
-      font-size: 75px;
+      font-size: 50px;
       margin-bottom: 20px;
       align-items:center;
       color: black;
@@ -115,9 +115,12 @@
 
   <div class="box2">
     <h2><a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/about-us.html">About Us</a>
-      <a href="-">Graphs</a>
-      <a href="https://github.com/alejandro-davila/Project3_Team2">GitHub Repository</a>
-      <a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/references.html">Tools/ References</a></h2>
+    <h2><a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/procedures.html">Proposal</a>
+
+    <a href="-">Graphs</a>
+    <a href="https://github.com/alejandro-davila/Project3_Team2">GitHub Repository</a>
+    <a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/references.html">Tools/ References</a></h2>
+
     <!-- <p>Content for Title 2 goes here.</p> -->
   </div>
 

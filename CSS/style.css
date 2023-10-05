@@ -3,27 +3,62 @@ body {padding: 0;
       display:block;}
 
 h1 {text-align: center;
-  font-size: 3.5rem;
-         color: black;
-        margin: 0;
-      text-align: center}
+  font-size: 100px;
+  color: black;
+  margin: 0;
+  text-align: center}
 
-h2 {font-size: 1.5rem;
+h2 {font-size: 30px;
         color: #333;
        margin: 0;
       text-align: center}
 
-h3 {font-size: 1.0rem;
-        color: #000bda;
+h3 {font-size: 40px;
+        color: #020202;
        margin: 0;
    text-align: center}
 
-p {font-size: 1rem;
-       color: #666}
+p {font-size: 1.5 rem;
+       color: #2b0b0b}
 
 h4 {font-size: 1.5rem;
         color: #333;
        margin: 0}
+
+h5 {font-size: 20px;
+        color: #020202;
+       margin: 0;
+   text-align: center}
+
+h6 {font-size: 20px;
+    color: #020202;
+   margin: 0;
+   display: flex;
+   flex-wrap: wrap;
+text-align: center}   
+
+
+
+
+/* ----------------- BOXES2 ---------------vvvvvvvv--> */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.two-column-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.two-column-list li {
+  flex: 50%; /* Allocate 50% width to each column for equal width */
+  padding: 10px; /* Add spacing between columns */
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
 
 /* ----------------- BOXES ---------------vvvvvvvv--> */
 .box {background-color: #f0f0f0;
@@ -33,53 +68,63 @@ h4 {font-size: 1.5rem;
                 margin: 10px;
             text-align: center}
 
-.box2 a {background-color: #f0f0f0;
-            display: inline-block;
-              border: 1px solid #ccc;
-             padding: 20px;
-             font-size: 50px;
-              height: 50px;
-              margin: 10px 0;
-          text-align: center}      
+    
           
 .personal-info {
             display: flex;
             justify-content: space-between;
-            margin-left: 50px;
+            margin-left: 100px;
             margin-right: 50px;
-            margin-top: 100px;
+            margin-top: 0px;
           }
 
-          .personal-info2 {
+          /* .personal-info2 {
             display: flex;
             justify-content: space-between;
             margin-left: 50px;
             margin-right: 50px;
             margin-top: 100px;
-          }
+          } */
+
+
+          .personal-info .person img {
+            width: 250px; /* Adjust the width to your desired size */
+            height: 250px; /* Adjust the height to your desired size */
+        }
+
 
 
 .personal-info * {
-            font-size:80px; /* Adjust the font size as needed */
-            margin: 0 5px; /* Adjust the spacing between elements horizontally */
-            padding: 5px 10px; /* Adjust the padding around elements */
+            font-size:25px; 
+            margin: 0 5px; 
+            padding: 5px 10px; 
+            margin-top: 77px;
           }          
 
         
-.person {
+/* * .person {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 200px;
             height: 200px ;
-            text-align: center}
+            text-align: center; 
+            margin-top: 100px;
+            position: relative
+          } */
 
-            
+* .person {
+  text-align: center; 
+  font-size: 30px;
+  position: relative; 
+}
+
+
         
 .person img {
-            width: 100px; /* Adjust the width of the image as needed */
-            height: auto; /* Maintain aspect ratio */
-            margin-bottom: 10px}
+            width: 100px; 
+            height: auto; 
+            margin-bottom: 5px}
 
 
 /* ----------------- BOXES ---------------^^^^^^^^--> */
@@ -87,18 +132,46 @@ h4 {font-size: 1.5rem;
 
 /* Define the styles for the box class */
 
+.box2 a {background-color: #f0f0f0;
+  display:inline-block;
+    border: 1px solid #ccc;
+   padding: 20px;
+   font-size: 25px;
+    height: 50px;
+    margin: 15px 0;
+text-align: center}  
+
+.box3 {
+  position:relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ccc; /* Change the background color as needed */
+  padding: 10px;
+  text-align: center;
+  font-size: 25px; /* Adjust the font size as needed */
+}
+
+.box4 {
+  position: relative;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 25px; /* Adjust the font size as needed */
+}
+
 
 
 .box1 {
-  width: 700px;
-  height: 1200px;
+  width: 400px;
+  height: 600px;
   background-color: #3498db;
   color: #fff;
   text-align: center;
   left: 25px;
   line-height: 100px;
-  top: 85px;
-  font-size: 40px;
+  bottom: 600px;
+  font-size: 25px;
   border: 2px solid #2980b9;
   border-radius: 10px;
   position: relative; /* Add relative positioning to contain the overlayControlContainer */
@@ -108,16 +181,12 @@ h4 {font-size: 1.5rem;
 
   position: absolute;
   top: 150px;
-  left: 175px;
+  left: 100px;
   z-index: 1000;
 }
 
 
-.person {
-  text-align: center; /* Center-align the content */
-  margin-bottom: 20px;
-  position: relative /* Add some spacing between the image and the GIF */
-}
+
 
 
 
@@ -130,22 +199,22 @@ h4 {font-size: 1.5rem;
 
 .overlay-image {
   position: absolute; /* Position the image absolutely within the container */
-  top: 50%; /* Position the image at the vertical center of the container */
-  left: 50%; /* Position the image at the horizontal center of the container */
+  top: 50px; /* Position the image at the vertical center of the container */
+  left: 50px; /* Position the image at the horizontal center of the container */
   transform: translate(-50%, -50%); /* Center the image using transform */
   z-index: 1; /* Ensure the image is on top of the iframe */
-  width: 250px;
-  height: 250px; /* Ensure the image doesn't exceed the container's width */
+  width: 50px;
+  height: 50px; /* Ensure the image doesn't exceed the container's width */
 }
 
 
 .overlay-image2 {
   position: absolute; /* Position the image absolutely within the container */
-  top: 50%; /* Position the image at the vertical center of the container */
-  left: 50%; /* Position the image at the horizontal center of the container */
+  top: 50px; /* Position the image at the vertical center of the container */
+  left: 50px; /* Position the image at the horizontal center of the container */
   transform: translate(-50%, -50%); /* Center the image using transform */
   z-index: 1; /* Ensure the image is on top of the iframe */
-  width: 80%; /* Ensure the image doesn't exceed the container's width */
+  width: 50%; /* Ensure the image doesn't exceed the container's width */
 }
 
 
@@ -162,3 +231,5 @@ h4 {font-size: 1.5rem;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
+
+
