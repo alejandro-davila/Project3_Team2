@@ -37,27 +37,20 @@ h6 {font-size: 20px;
    flex-wrap: wrap;
 text-align: center}   
 
-
-
-
-/* ----------------- BOXES2 ---------------vvvvvvvv--> */
-ul {
-  list-style: none;
-  padding: 0;
+h7 {
+  font-size: 150px;
+  color: #c4eae5;
   margin: 0;
-}
-
-.two-column-list {
   display: flex;
   flex-wrap: wrap;
+  text-align: center; /* Center the text horizontally */
+  padding-left: 400px; /* Move the text more to the right */
 }
 
+h8 {font-size: 1.0rem;
+  color: #333;
+ margin: 0}
 
-.two-column-list li {
-  flex: 50%; /* Allocate 50% width to each column for equal width */
-  padding: 10px; /* Add spacing between columns */
-  box-sizing: border-box; /* Include padding in the width calculation */
-}
 
 
 /* ----------------- BOXES ---------------vvvvvvvv--> */
@@ -137,7 +130,7 @@ ul {
     border: 1px solid #ccc;
    padding: 20px;
    font-size: 25px;
-    height: 50px;
+    height: 15px;
     margin: 15px 0;
 text-align: center}  
 
@@ -155,6 +148,7 @@ text-align: center}
 .box4 {
   position: relative;
   left: 0;
+  margin-top: 100px;
   width: 100%;
   text-align: center;
   font-size: 25px; /* Adjust the font size as needed */
@@ -171,7 +165,7 @@ text-align: center}
   left: 25px;
   line-height: 100px;
   bottom: 600px;
-  font-size: 25px;
+  font-size: 40px;
   border: 2px solid #2980b9;
   border-radius: 10px;
   position: relative; /* Add relative positioning to contain the overlayControlContainer */
@@ -180,8 +174,8 @@ text-align: center}
 #overlayControlContainer {
 
   position: absolute;
-  top: 150px;
-  left: 100px;
+  top: 100px;
+  left: 33px;
   z-index: 1000;
 }
 
@@ -233,3 +227,30 @@ text-align: center}
 }
 
 
+.column {
+  flex: 60%; /* Allocate 60% width to each column for wider boxes */
+  padding: 10px; /* Add spacing between columns */
+  box-sizing: border-box; /* Include padding in the width calculation */
+  border: 2px solid #ffffff; /* Add a black border around each column */
+  border-radius: 5px; /* Add rounded corners to the border */
+  background-color: #f0f0f0; /* Add a background color */
+}
+
+
+
+#header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.3); /* Use rgba format for transparency */
+  padding: 10px;
+  height: 200px;
+  margin-top: 20px;
+  width: 50%;
+  margin-left: 500px; /* Add margin-left to move the box to the left */
+}
+
+#title {
+  margin: 0; /* Remove default margin for h6 */
+  color: rgb(0, 60, 173); /* Optional text color for the title */
+}

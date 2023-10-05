@@ -1,7 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!----------------- HEAD ---------------vvvvvvvv-->
+<style>
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .centered-container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        min-height: 30vh; /* Adjust the minimum height for vertical positioning */
+    }
+    .two-column-list {
+        display: flex;
+
+    }
+    .column {
+        flex: 50%; /* Allocate 50% width to each column for equal width */
+        padding: 10px; /* Add spacing between columns */
+        box-sizing: border-box; /* Include padding in the width calculation */
+        border: 2px solid #000; /* Add a black border around each column */
+        border-radius: 5px; /* Add rounded corners to the border */
+        background-color: #f0f0f0; /* Add a background color */
+    }
+    .column h2 {
+        margin: 0; /* Remove default margin for h2 */
+    }
+</style>
+
+
+
+
+<!-------------------------------------------------------------------- HEAD ------------------------------------------------------------------vvvvvvvv-->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +42,7 @@
  
 
   <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  <link rel="stylesheet" href="https //unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin="" />
 
@@ -20,50 +52,92 @@
    <!-- Icons -->
   <link rel="shortcut icon" href="icons/favicon.ico">
 </head>
-<!----------------- HEAD ---------------^^^^^^^^-->
+<!-------------------------------------------------------------------- HEAD ------------------------------------------------------------------^^^^^^^^-->
 
 
-<!----------------- BODY ---------------vvvvvvvv-->
+
+
+
+<!-------------------------------------------------------------------- BODY ------------------------------------------------------------------vvvvvvvv-->
 <body>
-<!-- ------------------------------------------------ Titles ------------------------------------------------ -->
-<div>
-    <h1>Jason Miller's Processes</h1>
-</div>
-<!-- ------------------------------------------------ -->
+        <div>
+            <h1>Jason Miller's Processes</h1>
+        </div>
+<br>
+
+<!------------------------------------------------- Imports ------------------------------------------------ -->
+<h3>Imports/ Libraries</h3>
+        <div class="centered-container">
+            <ul class="two-column-list">
+                <div class="column">
+                    <h2>API_Data_pull.ipynb</h2>
+                    <li> import requests </li>
+                    <li> from pprint import pprint </li>
+
+                </div>
+                <div class="column">
+                    <h2>app.py</h2>
+                    <li> from flask import Flask, jsonify, g </li>
+                    <li> from sqlalchemy import create_engine, Column, Integer, String </li>
+                    <li> from sqlalchemy.ext.declarative import declarative_base </li>
+                    <li> from sqlalchemy.orm import sessionmaker, scoped_session </li>
+                    <li> import requests </li>
+                </div>
+            </ul>
+        </div>
+
+<!------------------------------------------------- Fetching Data ------------------------------------------------ -->
+<h3>Fetching Data / Data Transformation </h3>
+    <br>
+    <h5>
+        <iframe src="https://nbviewer.org/github/alejandro-davila/Project3_Team2/blob/main/Python/API_Data_pull.ipynb" width="800" height="400"></iframe>
+    <br>
+    </h5>
+                <!------------------------------------------------- Database Model Definition ------------------------------------------------ -->
+                <br>
+
+                <h3>Database Model Definition (SQLite) </h3>
+            <br>
+            <h5 style="list-style-type: none;">
+                <li> </li>
+        
+                <iframe src="icons/sqlite.png" alt="sql lite icon" width="800" height="500"></iframe>
+                <br>
+                <br>
+        </h5>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
 
 <!-- ------------------------------------------------ -->
 
 <div class="box3">
-    <h3>
-      <a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/index.html">Back to Map</a>
+  <h3>
+      <a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/thomas_dunn.html">Our next speaker Thomas Dunn</a>
+  </h3>
+</div>
 
-    </h3>
+<div class="box3">
+  <h3>
+    <a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/index.html">Back to Map</a>
+
+  </h3>
 </div>
 <div class="box3">
-    <h3>
+  <h3>
 
-      <a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/about-us.html">Back to About-Us</a>
-    </h3>
+    <a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/about-us.html">Back to About-Us</a>
+  </h3>
 </div>
+
+
 </body>
-<!----------------- BODY ---------------^^^^^^^^-->
-
-
 </html>

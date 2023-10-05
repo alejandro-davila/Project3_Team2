@@ -1,24 +1,31 @@
-
-
-
-//---------------------------------------------------------- MAPS (STREET, TOPO, DARK) ----------------------------------------------------------
+//---------------------------------------------------------- CREATING MAPS ----------------------------------------------------------
 function CreateMap(map,CHADEMOMarkers,J1772Markers,J1772CMarkers,NACSMarkers,chargertype){
   let street = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
   {attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
+  
+  
+//---------------------------------------------------------- MAPS (TOPOGRAPHIC) ----------------------------------------------------------
   let topo = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
     {attribution:
       'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'});
-  let PUBLIC_API_KEY ="pk.eyJ1Ijoic2NvbHNvbjgyIiwiYSI6ImNrdTYzbjhrdjU3ODMyb28yZmlrMHpybjYifQ.jzpQ-HWh3lT55X-v0IQoHA";
+  
+ //---------------------------------------------------------- MAPS (DARK) ---------------------------------------------------------- 
+  let PUBLIC_API_KEY ="pk.eyJ1Ijoic2NvbHNvbjgyIiwiYSI6ImNrdTYzbjhrdjU3ODMyb28yZmlrMHpybjYifQ.jzpQ-HWh1lT55X-v0IQoHA";
   let dark = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token={accessToken}",
     {attribution:
       'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
       maxZoom: 18,
       accessToken: PUBLIC_API_KEY});
+
+ //---------------------------------------------------------- MAPS Layout / Selection ---------------------------------------------------------- 
   let baseMaps = {
     "Street Map": street,
     "Topographic Map": topo,
     Dark: dark};
-  let myMap = L.map("map", {
+
+
+  //---------------------------------------------------------- Starting Point of Map ----------------------------------------------------------
+    let myMap = L.map("map", {
     center: [30.417, -100.810],
     layers:[street,map],
     zoom: 7});
@@ -103,24 +110,25 @@ function markers(){
         }
         for (let x in stations[i].ev_connector_types){
           chargertype.push(stations[i].ev_connector_types[x])
+          
         if (stations[i].ev_connector_types.includes("J1772")){
           let J1772Marker = L.marker([lat, long],{icon: J1772icon})
-          .bindPopup("<h3>" + properties+ "<h3><h3>EV Network: " + ev_network + "</h3>+<h3>Charge Level: " + chargelevel + "</h3>");
+          .bindPopup("<h5> " + properties+ "<h5><h8>EV Network: " + ev_network + "</h8><br><h8>Charge Level: " + chargelevel + "</h8>");
           J1772Markers.push(J1772Marker);
         }
         if (stations[i].ev_connector_types.includes("CHADEMO")){
           let CHADEMOMarker = L.marker([lat, long],{icon: CHADEMOicon})
-          .bindPopup("<h3>" + properties+ "<h3><h3>EV Network: " + ev_network + "</h3>+<h3>Charge Level: " + chargelevel + "</h3>");
+          .bindPopup("<h5> " + properties+ "<h5> <h8>EV Network: " + ev_network + "</h8><br><h8>Charge Level: " + chargelevel + "</h8>");
           CHADEMOMarkers.push(CHADEMOMarker);
         }
         if (stations[i].ev_connector_types.includes("J1772COMBO")){
           let J1772CMarker = L.marker([lat, long],{icon: J1772Comboicon})
-          .bindPopup("<h3>" + properties+ "<h3><h3>EV Network: " + ev_network + "</h3>+<h3>Charge Level: " + chargelevel + "</h3>");
+          .bindPopup("<h5> " + properties+ "<h5><h8>EV Network: " + ev_network + "</h8><br><h8>Charge Level: " + chargelevel + "</h8>");
           J1772CMarkers.push(J1772CMarker);
         }
         if (stations[i].ev_connector_types.includes("TESLA")&&chargelevel==="Level 2 Charger"){
           let NACSMarker = L.marker([lat, long],{icon: NACSicon})
-          .bindPopup("<h3>" + properties+ "<h3><h3>EV Network: " + ev_network + "</h3>+<h3>Charge Level: " + chargelevel + "</h3>");
+          .bindPopup("<h5> " + properties+ "<h5><h8>EV Network: " + ev_network + "</h8><br><h8>Charge Level: " + chargelevel + "</h8>");
           NACSMarkers.push(NACSMarker);
         }
           }

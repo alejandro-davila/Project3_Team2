@@ -27,24 +27,10 @@
 <!----------------- Function to update map size ---------------^^^^^^^^-->
 
 
+<!----------------- HEAD ---------------vvvvvvvv-->
 
-
-
-
-
-<!------------------------------ HEAD -------------------------------------vvvvvvvv-->
 <head>
-
   <style>
-
-
-    body{background-image: url("https://media.giphy.com/media/UxTZDNv0Zej4s/giphy-downsized-large.gif");
-    background-repeat: repeat;
-    background-size: cover
-    ;}
-
-
-
     #header {
         position: relative; 
         height: 200px;
@@ -63,22 +49,28 @@
       margin-bottom: 20px;
       align-items:center;
       color: black;
-      position: absolute; 
-      top: 50%;
-      left: 50%;
+      position: absolute; /* Enable absolute positioning */
+      top: 50%; /* Move the element down by 50% of its parent's height */
+      left: 50%; /* Center horizontally */
       transform: translate(-50%, -50%)}
 
+    /* Style the pseudo-elements */
     #header::before,
     #header::after {
         content: "";
         position: absolute;
         top: 0;
-        width: 15%; 
+        width: 15%; /* Set the size for both pseudo-elements */
         height: 100%;
         background-repeat: no-repeat;
-        background-size: 15%;
+        background-size: 15%; /* Set the size for both pseudo-elements */
     }
-  </style>
+
+
+
+</style>
+
+
 
 
   <meta charset="UTF-8">
@@ -87,31 +79,38 @@
   <title>Project 3</title>
  
 
-<!------------------------------ LEAFLET -------------------------------------vvvvvvvv-->
-
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin="" />
 
-
+  <!-- Leaflet JavaScript code -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
 
-<!------------------------------ CSS FILE -------------------------------------vvvvvvvv-->
+  <!-- Our CSS -->
   <link rel="stylesheet" type="text/css" href="CSS/style.css">
+
+   <!-- Icons -->
   <link rel="shortcut icon" href="icons/favicon.ico">
 </head>
 
 
-
-<!------------------------------ BODY -------------------------------------vvvvvvvv-->
+<!----------------- BODY ---------------vvvvvvvv-->
 <body>
-  <div id="header">
-    <h1 id="title">GreenScape: A Sustainable Future</h1>
-  </div>
 
-  <!---------- Sub-Sites ----------->
+
+
+
+
+  <div id="header">
+    <h6 id="title">??? QUESTIONS ???</h6>
+</div>
+
+
+
+  <!---------- Titles ----------->
 
   <div class="box2">
     <h2><a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/about-us.html">About Us</a>
@@ -120,30 +119,49 @@
     <a href="-">Graphs</a>
     <a href="https://github.com/alejandro-davila/Project3_Team2">GitHub Repository</a>
     <a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/references.html">Tools/ References</a></h2>
+
+    <!-- <p>Content for Title 2 goes here.</p> -->
   </div>
 
 
-  <!---------- SELECTION BOX ----------->
+
+
+   <!---------- SELECTION BOX ----------->
    <div class="container">
     <div id="map" style="height: 350px;"></div>
     
     <div class="box1">
-      Connection Types
+      Tools and Selections
       <div id="overlayControlContainer">
         <div class="overlayColumn">
-
+          <!-- Add your overlay control boxes for the first column here -->
         </div>
         <div class="overlayColumn">
-
+          <!-- Add your overlay control boxes for the second column here -->
         </div>
       </div>
     </div>
   </div>
 
-<!------------------------------ D3 JAVA -------------------------------------vvvvvvvv-->
+
+
+
+  <!-- D3 JavaScript -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <!-- Our JavaScript -->
   <script type="text/javascript" src="JS/logic.js"></script>
 </body>
+<!----------------- BODY ---------------^^^^^^^^-->
 
+
+
+<div class="box3">
+  <h3>
+    <a href="http://127.0.0.1:5500/GitHub_Repositories/16_17.Project3_Team2/index.html">Back to Main Map</a>
+  </h3>
+</div>
+
+
+</body>
 </html>
+
