@@ -68,8 +68,8 @@ markers.clearLayers();
 }
 
 //---------------------------------------------------------- JSON reader ----------------------------------------------------------
-let fuelurl = 'http://127.0.0.1:6660/stations'
-// let fuelurl = 'https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q&limit=200&fuel_type=ELEC&state=TX'
+//let fuelurl = 'http://127.0.0.1:6660/stations'
+let fuelurl = 'https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q&limit=200&fuel_type=ELEC&state=TX'
 function markers(){
   d3.json(fuelurl).then(function(data){
       console.log(data);
@@ -143,9 +143,9 @@ function markers(){
   })
 }
 //---------------------------------------------------------- PRODUCES MAP ON SITE (DO NOT DELETE!!)----------------------------------------------------------
-d3.json('http://127.0.0.1:6660/stations').then(markers)
+//d3.json('http://127.0.0.1:6660/stations').then(markers)
 
-// d3.json('https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q&limit=200&fuel_type=ELEC&state=TX').then(markers)
+d3.json('https://developer.nrel.gov/api/alt-fuel-stations/v1.json?api_key=RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q&limit=200&fuel_type=ELEC&state=TX').then(markers)
 //---------------------------------------------------------- PRODUCES MAP ON SITE (DO NOT DELETE!!)----------------------------------------------------------
 
 
