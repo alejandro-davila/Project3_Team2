@@ -1,3 +1,4 @@
+
 import requests
 import json
 import pandas as pd
@@ -11,7 +12,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from flask import send_file
 from io import BytesIO
-
+from flask_cors import CORS
 
 # Fetching data from the API
 API_KEY = 'RjZpx6DxeHBP4d17uK9Uifu6qhas3674psy6dJ7Q'
@@ -70,6 +71,8 @@ df = pd.DataFrame(data).drop(columns=cols_to_drop, errors='ignore')
 # Convert specific columns to JSON strings
 df['ev_connector_types'] = df['ev_connector_types'].apply(json.dumps)
 
+
+
 # Setup SQLite and save DataFrame
 DATABASE_URI = 'sqlite:///fuel_stations.db'
 engine = create_engine(DATABASE_URI)
@@ -77,6 +80,7 @@ df.to_sql('fuel_stations', con=engine, if_exists='replace', index=False)
 
 # Flask Setup
 app = Flask(__name__)
+CORS(app)
 db_session = scoped_session(sessionmaker(bind=engine))
 
 # Reflect db tables using automap_base
@@ -235,10 +239,10 @@ def chargers_in_cities():
 
     # Group by city and count the number of chargers in each city
     city_charger_counts = filtered_df['city'].value_counts()
-    
+
     # Sort the cities by the number of chargers in descending order
     city_charger_counts = city_charger_counts.sort_values(ascending=False)
-    
+
     # Create a bar chart
     plt.figure(figsize=(10, 6))
     city_charger_counts.plot(kind='bar')
@@ -282,10 +286,6 @@ def facility_type_distribution():
 
 if __name__ == '__main__':
     app.run(debug=True,port=6660)
-
-
-# if __name__ == '__main__':
-    # app.run(debug=True,port=6660)
 
 
 
